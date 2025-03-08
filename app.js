@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express=require("express");
 const bodyParser=require("body-parser");
 const https=require("https");
@@ -30,11 +31,11 @@ app.post("/",function(req,res){
 
     const jsonData=JSON.stringify(data);
 
-    const url="https://us12.api.mailchimp.com/3.0/lists/880d98e295";
+    const url=process.env.URL;
 
     const options={
         method : "POST",
-        auth:"Sainav:42c99530d3ed3b8d1dfc888f1dab38ad-us11"
+        auth:process.env.API_KEY
     }
 
     const request=https.request(url,options,function(response){
@@ -64,11 +65,6 @@ app.listen(process.env.PORT || 3000,function(){
     console.log("Server is running on port 3000");
 })
 
-//API key
-// 42c99530d3ed3b8d1dfc888f1dab38ad-us12
-
-//List ID
-// 880d98e295
 
 
 /*
